@@ -1,0 +1,14 @@
+export default function Profile({ creator, apps }) {
+  const userApps = apps.filter(app => app.creator === creator);
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>👤 {creator}</h1>
+      <p>Apps published: {userApps.length}</p>
+
+      {userApps.map(app => (
+        <p key={app.id}>🚀 {app.name}</p>
+      ))}
+    </div>
+  );
+}
