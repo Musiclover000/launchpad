@@ -1,0 +1,30 @@
+import { useState } from "react";
+
+export default function Publish({ onPublish }) {
+  const [appName, setAppName] = useState("My App");
+
+  const publishApp = () => {
+    onPublish({
+      name: appName,
+      creator: "Anonymous Creator"
+    });
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🚀 Publish Your App</h1>
+
+      <input
+        value={appName}
+        onChange={(e) => setAppName(e.target.value)}
+        style={{ padding: "10px", width: "100%" }}
+      />
+
+      <br /><br />
+
+      <button onClick={publishApp}>
+        🚀 Publish to App Store
+      </button>
+    </div>
+  );
+}
