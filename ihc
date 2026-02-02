@@ -1,0 +1,28 @@
+export default function Store({ apps, openApp }) {
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🏪 LaunchPad App Store</h1>
+
+      {apps.length === 0 && <p>No apps published yet.</p>}
+
+      {apps.map((app, index) => (
+        <div
+          key={index}
+          style={{
+            border: "1px solid #ccc",
+            padding: "15px",
+            marginBottom: "10px",
+            borderRadius: "10px"
+          }}
+        >
+          <h3>🚀 {app.name}</h3>
+          <p>By: {app.creator}</p>
+
+          <button onClick={() => openApp(app)}>
+            ▶️ Open App
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
