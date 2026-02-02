@@ -1,0 +1,66 @@
+import { useState } from "react";
+import Create from "./pages/Create";
+import Publish from "./pages/Publish";
+import Store from "./pages/Store";
+import AppView from "./pages/AppView";
+import Profile from "./pages/Profile";
+
+function App() {
+  const [page, setPage] = useState("create");
+  const [apps, setApps] = useState([]);
+  const [activeApp, setActiveApp] = useState(null);
+  const [activeCreator, setActiveCreator] = useState(null);
+
+  const addApp = (app) => {
+    setApps([...apps, app]);
+    setPage("store");
+  };
+
+  const likeApp = (id) => {
+    setApps(apps.map(app =>
+      app.id === id ? { ...app, likes: app.likes + 1 } : app
+    ));
+  };
+
+  const openApp = (app) => {
+    setApps(apps.map(a =>
+      a.id === app.id ? { ...a, installs: a.installs + 1 } : a
+    ));
+    setActiveApp(app);
+  };
+
+  if (activeCreator) {
+    return (
+      <Profile
+        creator={activeCreator}
+        apps={apps}
+      />
+    );
+  }
+
+  if (activeApp) {
+    return <AppView app={activeApp} exit={() => setActiveApp(null)} />;
+  }
+
+  return (
+    <div>
+      <nav style={{ padding: "10px" }}>
+        <button onClick={() => setPage("create")}>🎨 Create</button>
+        <button onClick={() => setPage("publish")}>🚀 Publish</button>
+        <button onClick={() => setPage("store")}>🏪 Store</button>
+      </nav>
+
+      {page === "create" && <Create />}
+      {page === "publish" && <Publish onPublish={addApp} />}
+      {page === "store" && (
+        <Store
+          apps={apps}
+          openApp={openApp}
+          likeApp={likeApp}
+        />
+      )}
+    </div>
+  );
+}
+
+export default App;
