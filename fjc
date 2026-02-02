@@ -1,0 +1,44 @@
+import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+export default function Publish() {
+  const [appName, setAppName] = useState("");
+  const [creator, setCreator] = useState("Anonymous");
+
+  const publishApp = async () => {
+    await addDoc(collection(db, "apps"), {
+      name: appName,
+      creator,
+      likes: 0,
+      installs: 0,
+      createdAt: Date.now()
+    });
+
+    alert("🚀 App published to LaunchPad!");
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🚀 Publish Your App</h1>
+
+      <input
+        placeholder="App Name"
+        value={appName}
+        onChange={(e) => setAppName(e.target.value)}
+      />
+
+      <br /><br />
+
+      <input
+        placeholder="Creator Name"
+        value={creator}
+        onChange={(e) => setCreator(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={publishApp}>🚀 Publish</button>
+    </div>
+  );
+}
