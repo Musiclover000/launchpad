@@ -1,0 +1,21 @@
+import { useState } from "react";
+import Create from "./pages/Create";
+import Publish from "./pages/Publish";
+
+function App() {
+  const [page, setPage] = useState("create");
+
+  return (
+    <div>
+      <nav style={{ padding: "10px" }}>
+        <button onClick={() => setPage("create")}>🎨 Create</button>
+        <button onClick={() => setPage("publish")}>🚀 Publish</button>
+      </nav>
+
+      {page === "create" && <Create />}
+      {page === "publish" && <Publish />}
+    </div>
+  );
+}
+
+export default App;
