@@ -1,0 +1,21 @@
+export default function SoundButton({ label, sound }) {
+  const playSound = () => {
+    const audio = new Audio(sound);
+    audio.play();
+  };
+
+  return (
+    <button
+      onClick={playSound}
+      style={{
+        padding: "15px",
+        margin: "10px",
+        fontSize: "16px",
+        borderRadius: "10px",
+        cursor: "pointer"
+      }}
+    >
+      🔊 {label}
+    </button>
+  );
+}
