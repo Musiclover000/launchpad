@@ -1,0 +1,16 @@
+launchpad/
+ ├── app/
+ │   ├── Home.jsx
+ │   ├── Create.jsx
+ │   ├── Test.jsx
+ │   ├── Publish.jsx
+ │   └── Profile.jsx
+ ├── components/
+ │   ├── SoundButton.jsx
+ │   ├── AppCard.jsx
+ │   └── Navbar.jsx
+ ├── firebase/
+ │   └── config.js
+ ├── public/
+ │   └── sounds/
+ └── index.jsx
