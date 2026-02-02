@@ -1,0 +1,35 @@
+import { useState } from "react";
+import SoundButton from "../components/SoundButton";
+import clickSound from "../sounds/click.mp3";
+
+export default function Create() {
+  const [buttons, setButtons] = useState([]);
+
+  const addButton = () => {
+    const newButton = {
+      label: `Sound ${buttons.length + 1}`,
+      sound: clickSound
+    };
+    setButtons([...buttons, newButton]);
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🎨 Create Your App</h1>
+
+      <button onClick={addButton}>
+        ➕ Add Sound Button
+      </button>
+
+      <div>
+        {buttons.map((btn, index) => (
+          <SoundButton
+            key={index}
+            label={btn.label}
+            sound={btn.sound}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
