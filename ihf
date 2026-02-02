@@ -1,0 +1,61 @@
+import { useState } from "react";
+import SoundButton from "../components/SoundButton";
+import clickSound from "../sounds/click.mp3";
+
+export default function Create() {
+  const [buttons, setButtons] = useState([]);
+  const [testing, setTesting] = useState(false);
+
+  const addButton = () => {
+    setButtons([
+      ...buttons,
+      {
+        label: `Sound ${buttons.length + 1}`,
+        sound: clickSound
+      }
+    ]);
+  };
+
+  if (testing) {
+    return (
+      <div style={{ padding: "20px" }}>
+        <h1>🧪 Test Mode</h1>
+        <p>This is how your app will feel to users.</p>
+
+        {buttons.map((btn, index) => (
+          <SoundButton
+            key={index}
+            label={btn.label}
+            sound={btn.sound}
+          />
+        ))}
+
+        <br />
+        <button onClick={() => setTesting(false)}>
+          🔙 Exit Test Mode
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🎨 Create Your App</h1>
+
+      <button onClick={addButton}>➕ Add Sound Button</button>
+      <button onClick={() => setTesting(true)} style={{ marginLeft: "10px" }}>
+        🧪 Test App
+      </button>
+
+      <div>
+        {buttons.map((btn, index) => (
+          <SoundButton
+            key={index}
+            label={btn.label}
+            sound={btn.sound}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
