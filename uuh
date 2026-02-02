@@ -1,0 +1,12 @@
+export default function SoundButton({ sound, label }) {
+  const playSound = () => {
+    const audio = new Audio(sound);
+    audio.play();
+  };
+
+  return (
+    <button onClick={playSound} className="sound-btn">
+      {label}
+    </button>
+  );
+}
