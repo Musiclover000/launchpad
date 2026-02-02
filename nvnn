@@ -1,0 +1,60 @@
+import { useState } from "react";
+
+export default function Publish() {
+  const [appName, setAppName] = useState("My First App");
+  const [published, setPublished] = useState(false);
+
+  const publishApp = () => {
+    // Later this connects to Vercel/Firebase
+    setPublished(true);
+  };
+
+  if (published) {
+    return (
+      <div style={{ padding: "20px" }}>
+        <h1>🚀 Published!</h1>
+        <p>Your app is live 🎉</p>
+        <p>
+          🌐 Link: <strong>https://launchpad.app/{appName.replace(/\s+/g, "").toLowerCase()}</strong>
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🚀 Publish Your App</h1>
+
+      <label>App Name</label>
+      <br />
+      <input
+        value={appName}
+        onChange={(e) => setAppName(e.target.value)}
+        style={{ padding: "10px", width: "100%", marginBottom: "15px" }}
+      />
+
+      <p>Version: <strong>v1.0</strong></p>
+
+      <h3>Publish Options</h3>
+      <ul>
+        <li>🌐 Website (Free)</li>
+        <li>🔒 Private Link</li>
+      </ul>
+
+      <button
+        onClick={publishApp}
+        style={{
+          padding: "15px",
+          fontSize: "16px",
+          borderRadius: "10px",
+          cursor: "pointer",
+          background: "#3B82F6",
+          color: "white",
+          border: "none"
+        }}
+      >
+        🚀 Publish Now
+      </button>
+    </div>
+  );
+}
