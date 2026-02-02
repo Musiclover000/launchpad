@@ -1,0 +1,8 @@
+import { useState } from "react";
+
+export default function Store({ apps, openApp, likeApp }) {
+  const [search, setSearch] = useState("");
+
+  const filteredApps = apps.filter(app =>
+    app.name.toLowerCase().includes(search.toLowerCase())
+  );
