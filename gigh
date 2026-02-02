@@ -1,0 +1,29 @@
+export default function Store({ apps, openApp, likeApp }) {
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🏪 App Store</h1>
+
+      {apps.map(app => (
+        <div
+          key={app.id}
+          style={{
+            border: "1px solid #ccc",
+            padding: "15px",
+            borderRadius: "10px",
+            marginBottom: "10px"
+          }}
+        >
+          <h3>{app.name}</h3>
+          <p>👤 {app.creator}</p>
+          <p>📂 {app.category}</p>
+          <p>❤️ {app.likes} | 📥 {app.installs}</p>
+
+          <button onClick={() => openApp(app)}>▶️ Open</button>
+          <button onClick={() => likeApp(app.id)} style={{ marginLeft: "10px" }}>
+            ❤️ Like
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
