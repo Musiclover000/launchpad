@@ -1,0 +1,36 @@
+import { useEffect, useState } from "react";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+export default function Store() {
+  const [apps, setApps] = useState([]);
+
+  useEffect(() => {
+    const loadApps = async () => {
+      const snapshot = await getDocs(collection(db, "apps"));
+      setApps(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    };
+    loadApps();
+  }, []);
+
+  const likeApp = async (id, likes) => {
+    await updateDoc(doc(db, "apps", id), {
+      likes: likes + 1
+    });
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🏪 LaunchPad App Store</h1>
+
+      {apps.map(app => (
+        <div key={app.id} style={{ marginBottom: "15px" }}>
+          <h3>{app.name}</h3>
+          <p>👤 {app.creator}</p>
+          <p>❤️ {app.likes}</p>
+          <button onClick={() => likeApp(app.id, app.likes)}>❤️ Like</button>
+        </div>
+      ))}
+    </div>
+  );
+}
