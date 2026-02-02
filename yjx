@@ -1,0 +1,51 @@
+import { useState } from "react";
+
+export default function Publish({ onPublish }) {
+  const [appName, setAppName] = useState("");
+  const [creator, setCreator] = useState("Anonymous");
+  const [category, setCategory] = useState("Games");
+
+  const publishApp = () => {
+    onPublish({
+      id: Date.now(),
+      name: appName,
+      creator,
+      category,
+      likes: 0,
+      installs: 0
+    });
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>🚀 Publish Your App</h1>
+
+      <input
+        placeholder="App Name"
+        value={appName}
+        onChange={(e) => setAppName(e.target.value)}
+      />
+
+      <br /><br />
+
+      <input
+        placeholder="Creator Name"
+        value={creator}
+        onChange={(e) => setCreator(e.target.value)}
+      />
+
+      <br /><br />
+
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option>Games</option>
+        <option>Pranks</option>
+        <option>Tools</option>
+        <option>School</option>
+      </select>
+
+      <br /><br />
+
+      <button onClick={publishApp}>🚀 Publish</button>
+    </div>
+  );
+}
